@@ -24,8 +24,8 @@ export class Entrada{
         return {
             funcion: this.funcion.getPelicula().getTitulo(),
             horario: this.funcion.getHorario(),
-            fila: this.fila,
-            columna: this.columna,
+            fila: this.fila+1, 
+            columna: this.columna+1,
             precio: this.funcion.getAsiento(this.fila, this.columna).getPrecio()
         };
     }

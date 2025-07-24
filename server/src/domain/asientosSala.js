@@ -58,4 +58,10 @@ export class AsientosSala {
   getAsientos() {
     return this.asientos;
   }
+    getCantFilas() {
+        return this.cantFilas;
+    }
+    getCantColumnas() {
+        return this.CantColumnas;
+    }
 }

@@ -39,4 +39,7 @@ export class Funcion{
             asientos: this.asientosSala.asientosADTO()
         };
     }   
+    asientoFueraDeRango(fila, columna) {
+        return fila < 1 || fila >= this.asientosSala.getCantFilas() || columna < 1 || columna >= this.asientosSala.getCantColumnas();
+    }
 }

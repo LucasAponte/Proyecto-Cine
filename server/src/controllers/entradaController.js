@@ -14,17 +14,21 @@ export class EntradaController{
         // Verificar si la función existe
         console.log(req.body);
         const { idFuncion,fila,columna } = req.body
-        
-        if (!funcion) {
+        if(funcion.asientoFueraDeRango(fila, columna)) {
+            res.status(400).json({ message: 'Fila o columna fuera de rango' });
+            throw new Error("Fila o columna fuera de rango.");
+        }
+        if (!funcion) { //Debería buscar la función por idFuncion
+            res.status(404).json({ message: 'Función no encontrada' });
             throw new Error("La función no existe.");
         }
         // Verificar si los asientos están disponibles
-        if (funcion.getAsiento(fila, columna).getOcupado()) {
+        if (funcion.getAsiento(fila-1, columna-1).getOcupado()) {
             res.status(400).json({ message: 'El asiento ya está reservado' });
             throw new Error("El asiento ya está reservado.");
         }
         // Crear la entrada
-        const entrada = new Entrada(funcion, fila, columna);
+        const entrada = new Entrada(funcion, fila-1, columna-1);
         res.status(201).json({
            entrada: entrada.entradaADTO(),
            message: 'Entrada creada exitosamente'
